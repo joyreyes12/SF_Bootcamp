@@ -1,0 +1,7 @@
+<aura:event type="APPLICATION" description="Event template">
+
+	<aura:attribute name="dDate" type="Date" default=""/>
+    <aura:attribute name="fFrom" type="String" default=""/>
+    <aura:attribute name="fTo" type="String" default=""/>
+
+</aura:event>

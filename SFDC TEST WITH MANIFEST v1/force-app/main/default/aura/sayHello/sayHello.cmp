@@ -1,0 +1,7 @@
+<aura:component >
+    
+    <aura:method 	name = "sayHello2"
+                 			action = "{!c:handleSayHello}"
+                	 		access = "public"/>
+	
+</aura:component>

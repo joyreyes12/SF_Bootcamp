@@ -1,0 +1,7 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <!--> Another type for event is component </-->
+	
+    <!-->  This will be empty until a component that has the "Register" throw a fire with the data putting it in this event </-->
+    <aura:attribute name ="message" type= "String"/>
+
+</aura:event>

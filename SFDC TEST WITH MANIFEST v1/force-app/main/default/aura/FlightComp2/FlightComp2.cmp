@@ -1,0 +1,180 @@
+<aura:component controller = "FlightCls" implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}" />
+    <aura:handler event = "c:FlightEvent" action = "{!c.filterResults}"/>
+    <aura:handler event = "c:reDirect" action = "{!c.gotoURL}"/>
+    <aura:handler event = "c:reDirect" action = "{!c.send}"/>
+    <aura:attribute name="flights" type="List"/>
+    <aura:attribute name="modalDetails" type="Deloitte_Airlines__c"/>
+    <aura:attribute name="sCheck" type="Contact"/>
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="reDirect" type = "Book_Flight__c"/>
+    <aura:attribute name="cDetails" type = "List"/>
+    
+    <aura:attribute name="totalPrice" type = "Decimal"/>
+    
+    <aura:attribute name="parentOptions" type="List"/>
+    <aura:attribute name="dependentPicklist" type="Object"/>
+    <aura:attribute name="dependentOptions" type="List"/>
+    <aura:attribute name="disabledPick" type="Boolean" default="true"/>
+    <aura:if isTrue = "{!not(empty(v.flights))}">
+			        <div class="slds-box slds-theme--default slds-container-large">
+                        <lightning:icon iconName="action:filter" alternativeText="Click to Call" size="small"/>
+                         Flight Results
+                    </div>
+		
+
+    		<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+
+                <thead>
+
+ 						<tr>
+                            <th class="" scope="col"><div class="slds-truncate"></div></th>
+                           	<th class="" scope="col"><div class="slds-truncate">Flight Number</div></th>
+                            <th class="" scope="col"><div class="slds-truncate">Departure/Arrive</div></th>
+                            <th class="" scope="col"><div class="slds-truncate">Departure Time</div></th>
+                            <th class="" scope="col"><div class="slds-truncate">Arrival Time</div></th>
+                            <th class="" scope="col"><div class="slds-truncate">Fly Only</div></th>
+                            <th class="" scope="col"><div class="slds-truncate">Available Seats</div></th>
+                    	</tr>
+                  <br/>
+                </thead>
+                <tbody>
+                 <aura:iteration  items = "{!v.flights}" var = "row"  indexVar="index">
+                     	<tr class="slds-hint-parent">
+                            
+                            <td ><div class="slds-truncate">
+                                <ui:inputradio name="radioGroup" change="{!c.onRadio}" text = "{#row}" ></ui:inputradio>
+                                </div></td>
+                        	<td><div class="slds-truncate">{#row.Name}</div></td>
+                            <td><div class="slds-truncate">{#row.Depart_Arrive__c}</div></td>
+                            <td><div class="slds-truncate"><lightning:formattedDateTime value = "{#row.Departure_Time__c}" hour="2-digit" minute="2-digit"/></div></td>
+                            <td><div class="slds-truncate"><lightning:formattedDateTime value = "{#row.Arrival_Time__c}" hour="2-digit" minute="2-digit"/></div></td>
+                            <td><div class="slds-truncate">{#row.Fly_Only__c}</div></td>
+                            <td><div class="slds-truncate">{#row.Available_Seats__c}</div></td>
+                     	</tr> 
+                     
+                     <br/>
+                </aura:iteration>
+                </tbody>
+            </table>
+   
+    
+    
+    		  	<div class="slds-box slds-theme--default slds-container-large">
+    				<p align="right"><lightning:button aura:id="disablebuttonid" label="Book Flight"
+                                                  value="{!row}"
+                                                  name="{!index}"
+                                                  variant="brand"
+                                                  onclick="{!c.openModal}"
+                                                /></p>
+    			</div>
+             <aura:set attribute = "else">
+            		Nothing was found
+            </aura:set>
+            
+            </aura:if>
+    
+            <div class="slds-m-around_xx-large">
+                <aura:if isTrue="{!v.isModalOpen}">
+                     
+                    <!-- Modal/Popup Box starts here-->
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <!-- Modal/Popup Box Header Starts here-->
+                            <header class="slds-modal__header" style = "background-color:#000080; color:white">
+                                <lightning:buttonIcon iconName="utility:close"
+                                                      onclick="{! c.closeModel }"
+                                                      alternativeText="close"
+                                                      variant="bare-inverse"
+                                                      class="slds-modal__close"/>
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Booking</h2>
+                            </header>
+                            <!--Modal/Popup Box Body Starts here-->
+                           
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <p>	<b><lightning:icon iconName="standard:customers" alternativeText="Click to Call" size="small"/>
+                         						Personal Details
+                                    	</b>
+                                </p>
+                                  
+                                  <br/>
+                                  
+                                <div  class="slds-border_bottom">
+                            	</div>
+                                  
+                                  <br/>
+                                  
+                                <p aura:id = "thisPane">
+                                <Lightning:input aura:id = "fName" label = "First Name" value = "{!v.cDetails.FirstName}"  required = "True" ></Lightning:input>
+                                <Lightning:input aura:id = "lName" label = "Last Name" value = "{!v.cDetails.LastName}"  required = "True"></Lightning:input>
+                                <Lightning:input aura:id = "email" label = "Email" value = "{!v.cDetails.Email}"  required = "True"></Lightning:input>
+                                
+                                <lightning:select  value = "{!v.cDetails.Package__c}" name="parentPicklist" label="Package:" aura:id="parentPicklist" onchange="{!c.totalPrice}" required = "True">
+                                    <option value="">None</option>
+                                    <aura:iteration items="{!v.parentOptions}" var="p">
+                                        <option value="{!p.value}">{!p.text}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                                    
+                                    
+                                </p>
+                                  
+                            </div>
+                              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <p>	<b><lightning:icon iconName="custom:custom20" alternativeText="Click to Call" size="small"/>
+                         						Flight Details
+                                    	</b>
+                                </p>
+                                  
+                                  <br/>
+                                  
+                                <div  class="slds-border_bottom">
+                            	</div>
+                                  
+                                  <br/>
+                                <p>
+                                Flight Number: {!v.modalDetails.Name}
+                                </p>
+                                  <br/>
+                                 <p>
+                                Departure Date: {!v.modalDetails.Departure_Date__c}
+                                </p>
+                                  <br/>
+                                 <p>
+                                Origin: {!v.modalDetails.Flying_From__c}
+                                </p>
+                                  <br/>
+                                 <p>
+                                Destination: {!v.modalDetails.Flying_To__c}
+                                </p>
+                                  <br/>
+								<div  class="slds-border_bottom">
+                            	</div>
+                                  <br/>
+                                <p Align = "right">
+                                Total Price:  {!v.modalDetails.Fly_Only__c}
+                                </p>
+                            </div>
+                            
+                            <!--Modal/Popup Box Footer Starts here-->
+                            <footer class="slds-modal__footer">
+                                <lightning:button variant="neutral"
+                                                  label="Cancel"
+                                                  title="Cancel"
+                                                  onclick="{! c.closeModel }"/>
+                                <lightning:button variant="brand"
+                                                  label="Book"
+                                                  title="Book"
+                                                  onclick="{!c.submitDetails}"
+                                                  />
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </aura:if>
+            </div>
+    
+
+  
+</aura:component>

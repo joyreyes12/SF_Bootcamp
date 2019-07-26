@@ -1,0 +1,7 @@
+<aura:component controller = "ThirdCompCls" >
+	
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}" />
+    
+     <aura:attribute name="totalAmount" type="Decimal"/>
+    
+</aura:component>

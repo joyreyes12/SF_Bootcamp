@@ -1,0 +1,12 @@
+<aura:component implements ="flexipage:availableForAllPageTypes" Access = "Global">
+    
+    <!-->  This catches the event that was thrown in the sendMessage component </-->
+    <!-->  name = "send" will be remove once event is a application type </-->
+    <aura:handler 	event = "c:sendMessageEvent"
+                  			action = "{!c.handleSend}"/>
+    
+    <c:sendMessage/>
+    
+      <!--><c:sendMessage send = "{!c.handleSend}"/><!-->
+    
+</aura:component>

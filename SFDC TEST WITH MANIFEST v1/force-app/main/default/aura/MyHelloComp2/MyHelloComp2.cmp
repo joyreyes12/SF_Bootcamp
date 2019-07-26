@@ -1,0 +1,20 @@
+<aura:component implements ="flexipage:availableForAllPageTypes" Access = "Global">
+    
+    <!--> This is how to define a value </-->
+    <aura:attribute name = "message" type = "String"/>
+
+    <aura:attribute name = "output" type = "String"/>
+
+    <Lightning:input value = "{!v.message}" label = "Message" />
+    
+    <br/>
+    
+    <button onclick = "{!c.sayHello}">Say Hello!</button>
+    
+    <br/>
+    <br/>
+    
+    {!v.output}
+    
+	
+</aura:component>

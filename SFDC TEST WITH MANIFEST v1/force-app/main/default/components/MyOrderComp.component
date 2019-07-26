@@ -1,0 +1,50 @@
+<apex:component Controller="MyOrdersCls" >
+    
+       <apex:form >
+       <div align="center">
+		<apex:inputText value="{!ordNum}"/>
+        <apex:commandButton value="Search" title="Search action"  action="{!orderSearch}"  reRender="outputId" />
+        </div>
+       <br/>
+      
+       <apex:outputPanel layout="block" id="outputId">
+       <table border="0" width = "100%">
+
+        <tr>
+            <th>Order Number</th>
+            <th>Account Name</th>
+            <th>Status</th>
+            <th>Created Date</th>
+        </tr>
+
+        <apex:repeat var="ord" value="{!OrderList}">
+
+        <tr>
+            <td><apex:outputLink value="/apex/MyOrderDetailVF?id={!ord.ID}" >{!ord.OrderNumber}</apex:outputLink></td>
+            <td>{!ord.Account.Name}</td>
+            <td>{!ord.Status}</td>
+         	<td><apex:outputText Value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!ord.CreatedDate}" /> </apex:outputText></td>
+        </tr>
+
+        </apex:repeat> 
+	
+    </table>
+       </apex:outputPanel>
+       <br/>
+       <footer>
+       <apex:outputPanel style="text-align:center;" layout="block">
+          <apex:commandButton value="First" reRender="outputId" action="{!setCon.first}" status="paginationStatus" />
+          <apex:commandButton value="Previous" reRender="outputId" action="{!setCon.previous}" status="paginationStatus"/>
+          <apex:commandButton value="Next" reRender="outputId" action="{!setCon.next}" status="paginationStatus"/>
+           <apex:commandButton value="Last" reRender="outputId" action="{!setCon.last}" status="paginationStatus" />
+          <apex:actionStatus id="paginationStatus">
+             <apex:facet name="start">
+                 Please wait...<img src="/img/loading32.gif" style="width: 18px;"/>
+             </apex:facet>
+          </apex:actionStatus>
+       </apex:outputPanel>
+        </footer>
+    	
+    </apex:form>
+    
+</apex:component>

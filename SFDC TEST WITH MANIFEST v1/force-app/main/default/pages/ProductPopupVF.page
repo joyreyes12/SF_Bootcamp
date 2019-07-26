@@ -1,0 +1,5 @@
+<apex:page standardController="Product2">
+    
+   		<apex:detail relatedList="false"/>
+    
+</apex:page>

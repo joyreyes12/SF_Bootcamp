@@ -1,0 +1,9 @@
+<apex:page Controller="MyOrdersCls"  lightningStylesheets="True">
+    
+    <c:HeaderComp />
+   
+    <c:MyOrderComp />
+    
+    <c:FooterComp />
+    
+</apex:page>

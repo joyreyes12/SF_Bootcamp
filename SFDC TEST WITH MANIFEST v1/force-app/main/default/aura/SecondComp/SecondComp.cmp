@@ -1,0 +1,57 @@
+<aura:component controller = "FirstCompCls" implements ="flexipage:availableForAllPageTypes" Access = "Global">
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}" />
+      <aura:handler	event = "c:FirstCompEvent" action = "{!c.handleAmount}"/>
+    
+    <aura:attribute name="totalAmount" type="Decimal"/>
+     <aura:attribute name="donations" type="List"/>
+    	
+
+         <div aria-labelledby="newDonateform">
+                <fieldset class="slds-box slds-theme--default slds-container--small"> 
+         
+	TOP 5 Donations <br/>
+  <table class="slds-table slds-table_cell-buffer slds-table_header-hidden slds-table_bordered">
+  <thead class="slds-assistive-text">
+      </thead>
+      
+     <aura:iteration  items = "{!v.donations}" var = "donation">
+         <br/>
+        <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+            
+            Name
+             </th>
+           <th class="" scope="col">
+            
+            Amount
+             </th>
+         </tr>
+         
+         
+         <tr>
+             
+            <th class="" scope="col">
+            
+            {#donation.Name} 
+             </th>
+             
+            <th class="" scope="col">
+            
+            {#donation.Amount__c}
+             </th>
+         	
+         
+             
+         </tr> 
+         
+         <br/>
+     </aura:iteration>
+      
+</table>
+                    
+                    <br/>
+                    Total Donated Amount:
+                    {!v.totalAmount}
+           </fieldset> </div>
+</aura:component>

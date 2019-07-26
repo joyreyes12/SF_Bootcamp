@@ -1,0 +1,22 @@
+<apex:page controller="FlightCls2" renderAs="PDF">
+	<apex:form >
+			<h1>Booking Confirmation</h1>
+        	<p style = "font-family:Arial Black, Gadget, Sans-serif; font-size:12px;">Your booking has been confirmed. Thank you for choosing Deloitte Airlines!</p>
+        <body>
+            <table style = "border-collapse:collapse; width: 100%; font-family: rebuchet MS, Arial, Helvetica, sans-serif;">
+                <body style = "display: table-row-group; vertical-align:middle">
+                    <tr style = "display: table-row-group">
+                    	<th style = "font-size:1em; text-align:left; padding-top: 5px; padding-bottom:4px; padding: 3px 7px 2px 7px; background-color: gray; color: black; border:1px solid white;">Name </th>
+                        <th style = "font-size:1em; text-align:left; padding-top: 5px; padding-bottom:4px; padding: 3px 7px 2px 7px; background-color: gray; color: black; border:1px solid white;">Departure Date </th>
+                        <th style = "font-size:1em; text-align:left; padding-top: 5px; padding-bottom:4px; padding: 3px 7px 2px 7px; background-color: gray; color: black; border:1px solid white;">Total Price </th>
+                    </tr>
+                    <tr style = "display: table-row-group">
+                    		<td style = "font-size: 1em; border:1px solid black; padding: 3px 7px 2px 7px; border-collapse:collapse;">Put Name Here</td>
+                        	<td style = "font-size: 1em; border:1px solid black; padding: 3px 7px 2px 7px; border-collapse:collapse;">Put Date Here</td>
+                        	<td style = "font-size: 1em; border:1px solid black; padding: 3px 7px 2px 7px; border-collapse:collapse;">Put Total Price</td>
+                    </tr>
+                </body>
+            </table>
+        </body>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,7 @@
+<aura:component >
+    
+    <c:sayHello aura:id = "greeter"/>
+    
+    <button onclick = "{!c.doGreet}">Greet</button>
+	
+</aura:component>

@@ -1,0 +1,15 @@
+<apex:component >
+    
+    <br/>
+    This is the Header
+    <br/>
+    
+    <!-->
+   <apex:attribute name="orderID" description="Order ID" type="Id" required="true"/>
+
+        <apex:form >
+            <apex:outputLink value="/apex/MyOrderDetailPDFVF?id={!orderID}">PDF</apex:outputLink>
+        </apex:form>
+    <br/>
+		</-->
+</apex:component>

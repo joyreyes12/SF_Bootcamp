@@ -1,0 +1,46 @@
+<aura:component controller = "FlightCls" implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}" />
+    
+    <aura:attribute name="dDate" type="Date" default=""/>
+    <aura:attribute name="fFrom" type="String" default=""/>
+    <aura:attribute name="fTo" type="String" default=""/>
+    
+    <aura:attribute name="parentOptions" type="List"/>
+    <aura:attribute name="dependentPicklist" type="Object"/>
+    <aura:attribute name="dependentOptions" type="List"/>
+    <aura:attribute name="disabledPick" type="Boolean" default="true"/>
+    
+	<div aria-labelledby="newDonateform">
+		<fieldset class="slds-box slds-theme--default slds-container--medium">
+            
+            <lightning:icon iconName="custom:custom20" alternativeText="Click to Call" size="small"/>
+        	Where would you like to go? <br/>
+
+            <lightning:select value = "{!v.fFrom}" name="parentPicklist" label="Flying From:" aura:id="parentPicklist" onchange="{!c.PickChange}" required = "True">
+                <option value="">None</option>
+                <aura:iteration items="{!v.parentOptions}" var="p">
+                    <option value="{!p.value}">{!p.text}</option>
+                </aura:iteration>
+            </lightning:select>
+            
+            
+            <lightning:select value = "{!v.fTo}" name="dependentPicklist" label="Flying To:" disabled="{!v.disabledPick}" required = "True">
+                <option value="">None</option>
+                <aura:iteration items="{!v.dependentOptions}" var="d">
+                    <option value="{!d.value}">{!d.text}</option>
+                </aura:iteration>
+            </lightning:select>
+            
+            
+            <ui:inputDate  required="true" aura:id="expdate" label="Departure Date" class="field" value="{!v.dDate}" displayDatePicker="true" />
+            
+            <br/>
+            <div align="right">
+                <lightning:button label="Find Flights" variant="brand" onclick = "{!c.searchF}"/>
+            </div>
+
+        </fieldset>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,7 @@
+<aura:event type="APPLICATION" description="Event template">
+    
+    
+    <aura:attribute name = "thisBooking" type = "Book_Flight__c"/>    
+    
+    
+</aura:event>

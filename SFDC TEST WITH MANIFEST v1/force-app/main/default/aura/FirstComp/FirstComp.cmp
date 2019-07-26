@@ -1,0 +1,33 @@
+<aura:component controller = "FirstCompCls" implements ="flexipage:availableForAllPageTypes" Access = "Global">
+ 
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}" />
+    
+    <aura:attribute name="totalAmount" type="Decimal"/>
+    
+    <aura:attribute name="thisD" type="Donation__c" default="{'sobjectType': 'Donation__c',
+                         'Name': '',
+                         'Amount__c': '',
+                         'Note__c': '', 
+                         'Donation_Date__c': ''
+                       }"/>
+      <div aria-labelledby="newDonateform">
+                <fieldset class="slds-box slds-theme--default slds-container--small"> 
+    <FORM  >
+        
+     Donation Information<br/><br/>
+        <!--   Total Donated Amount:  {!v.totalAmount}<br/><br/></-->
+    <Lightning:input value = "{!v.thisD.Name}" label = "Donor Name" type = "String"/><br/>
+    <Lightning:input value = "{!v.thisD.Amount__c}" label = "Amount" type = "Decimal" /><br/>
+     <Lightning:input value = "{!v.thisD.Donation_Date__c}" label = "Date" type = "Date"/><br/>
+    <Lightning:input value = "{!v.thisD.Note__c}" label = "Note" type = "String"/><br/>
+    
+    
+    <button class="slds-button slds-button_brand" onclick = "{!c.saveD}">Save Donation</button>
+<br/>
+	</FORM>
+                    
+
+</fieldset> </div>
+    
+</aura:component>

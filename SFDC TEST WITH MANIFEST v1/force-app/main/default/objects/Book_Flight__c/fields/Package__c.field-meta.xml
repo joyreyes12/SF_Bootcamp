@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Package__c</fullName>
+    <externalId>false</externalId>
+    <label>Package</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Fly Only</fullName>
+                <default>true</default>
+                <label>Fly Only</label>
+            </value>
+            <value>
+                <fullName>Fly + Baggage</fullName>
+                <default>false</default>
+                <label>Fly + Baggage</label>
+            </value>
+            <value>
+                <fullName>Fly + Baggage + Meal</fullName>
+                <default>false</default>
+                <label>Fly + Baggage + Meal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

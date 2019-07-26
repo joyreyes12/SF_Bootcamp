@@ -1,0 +1,5 @@
+<apex:component >
+    <br/>
+    This is the Footer
+	<br/>    
+</apex:component>
